@@ -40,7 +40,7 @@ void setup() {
   ledON = 0;
 
   // first we clear our screen to black
-  arduboy.clearDisplay();
+  arduboy.clear();
 }
 
 // main loop
@@ -58,7 +58,7 @@ void loop() {
     return;
 
   // fetch all buttons up/down
-  buttons = arduboy.getInput();
+  buttons = arduboy.buttonsState();
 
   // left,up,right alone always ups the LED values, but only visible if LED on
 
@@ -69,14 +69,14 @@ void loop() {
 
     // A is special - turns LED off, and flushes display
     if (buttons == A_BUTTON && !lastinput) {
-      arduboy.clearDisplay();
+      arduboy.clear();
       arduboy.setRGBled(0,0,0);
       ledON = 0;
       }
 
     // B is special - turns LED on and randoms the setting
     if (buttons == B_BUTTON) {
-      arduboy.clearDisplay();
+      arduboy.clear();
       ledR = random(0,255);
       ledG = random(0,255);
       ledB = random(0,255);
@@ -106,12 +106,12 @@ void loop() {
   arduboy.print(F("Button & LED Tester"));
 
   // show all button statuses
-  arduboy.setCursor( 10,15); if (buttons & LEFT_BUTTON ) {arduboy.print(F("\x11L\x10"));} else  {arduboy.print(F(" L "));};
-  arduboy.setCursor( 28,15); if (buttons & UP_BUTTON   ) {arduboy.print(F("\x11U\x10"));} else  {arduboy.print(F(" U "));};
-  arduboy.setCursor( 46,15); if (buttons & RIGHT_BUTTON) {arduboy.print(F("\x11R\x10"));} else  {arduboy.print(F(" R "));};
-  arduboy.setCursor( 64,15); if (buttons & DOWN_BUTTON ) {arduboy.print(F("\x11\D\x10"));} else  {arduboy.print(F(" D "));};
-  arduboy.setCursor( 82,15); if (buttons & A_BUTTON    ) {arduboy.print(F("\x11\A\x10"));} else  {arduboy.print(F(" A "));};
-  arduboy.setCursor(100,15); if (buttons & B_BUTTON    ) {arduboy.print(F("\x11\B\x10"));} else  {arduboy.print(F(" B "));};
+  arduboy.setCursor( 10,15); if (buttons & LEFT_BUTTON ) {arduboy.print(F("\x11" "L" "\x10"));} else  {arduboy.print(F(" L "));};
+  arduboy.setCursor( 28,15); if (buttons & UP_BUTTON   ) {arduboy.print(F("\x11" "U" "\x10"));} else  {arduboy.print(F(" U "));};
+  arduboy.setCursor( 46,15); if (buttons & RIGHT_BUTTON) {arduboy.print(F("\x11" "R" "\x10"));} else  {arduboy.print(F(" R "));};
+  arduboy.setCursor( 64,15); if (buttons & DOWN_BUTTON ) {arduboy.print(F("\x11" "D" "\x10"));} else  {arduboy.print(F(" D "));};
+  arduboy.setCursor( 82,15); if (buttons & A_BUTTON    ) {arduboy.print(F("\x11" "A" "\x10"));} else  {arduboy.print(F(" A "));};
+  arduboy.setCursor(100,15); if (buttons & B_BUTTON    ) {arduboy.print(F("\x11" "B" "\x10"));} else  {arduboy.print(F(" B "));};
 
   // show LED values and LEDbw values
   if (!ledON) {
